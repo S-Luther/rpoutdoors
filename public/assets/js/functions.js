@@ -1,4 +1,6 @@
 var stripe = Stripe('pk_live_51JMkixJlaDijqZBddeXWU27898Hsc8MUh96kkIMhlgqbS8eZ5sMxEb9rbD6xo3gylm60V4heVcWnH27UmI1buPKd00GKt7UBUT');
+localStorage.setItem("total", 0)
+localStorage.setItem("giftcert", 0)
 
 var items = 0;
 var byoOptions = [{
@@ -77,7 +79,7 @@ var byoOptions = [{
     id:"LargeZipper",
     checked: false,
     name: "L - Zipper Pouch",
-    price: 24.99,
+    price: 39.99,
     ship:  0.5,
     image: "https://firebasestorage.googleapis.com/v0/b/redpatchoutdoors-test.appspot.com/o/RPO%20Product%20Photo%209-19-21%2FBig%20Zipper%20Pouch%201.JPG?alt=media&token=b5fec2fc-4832-4839-a29d-ff4ecc272709",
     description: "Featuring one large internal pocket and three layers of molle on each side."
@@ -92,6 +94,9 @@ var cartNum =  document.getElementById("cartnum")
 
 function colorElement(id){
     return '<div onmouseover="popup(\'tan'+id+'\')" onmouseout="popdown(\'tan'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'tan" type="radio" name="'+id+'color" value="tan" /><label class="drinkcard-cc tan" for="'+id+'tan"></label><div class="popuptext" id="tan'+id+'Popup"><p>Tan</p></div></div><div onmouseover="popup(\'orange'+id+'\')" onmouseout="popdown(\'orange'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'orange" type="radio" name="'+id+'color" value="orange" /><label class="drinkcard-cc orange"for="'+id+'orange"></label><div class="popuptext" id="orange'+id+'Popup"><p>Orange</p></div></div><div onmouseover="popup(\'green'+id+'\')" onmouseout="popdown(\'green'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'green" type="radio" name="'+id+'color" value="green" /><label class="drinkcard-cc green" for="'+id+'green"></label><div class="popuptext" id="green'+id+'Popup"><p>Green</p></div></div><div onmouseover="popup(\'camo'+id+'\')" onmouseout="popdown(\'camo'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'camo" type="radio" name="'+id+'color" value="camo" /><label class="drinkcard-cc camo"for="'+id+'camo"></label><div class="popuptext" id="camo'+id+'Popup"><p>Camo</p></div></div>'
+}
+function hatColorElement(id){
+    return '<div onmouseover="popup(\'black'+id+'\')" onmouseout="popdown(\'black'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'black" type="radio" name="'+id+'color" value="black" /><label class="drinkcard-cc black" for="'+id+'black"></label><div class="popuptext" id="black'+id+'Popup"><p>black</p></div></div><div onmouseover="popup(\'camo'+id+'\')" onmouseout="popdown(\'camo'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'camo" type="radio" name="'+id+'color" value="camo" /><label class="drinkcard-cc hcamo"for="'+id+'camo"></label><div class="popuptext" id="camo'+id+'Popup"><p>camo</p></div></div><div onmouseover="popup(\'charcoal'+id+'\')" onmouseout="popdown(\'charcoal'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'charcoal" type="radio" name="'+id+'color" value="charcoal" /><label class="drinkcard-cc charcoal" for="'+id+'charcoal"></label><div class="popuptext" id="charcoal'+id+'Popup"><p>charcoal</p></div></div><div onmouseover="popup(\'green'+id+'\')" onmouseout="popdown(\'green'+id+'\')" class="popup" id="description'+id+'"><input id="'+id+'green" type="radio" name="'+id+'color" value="green" /><label class="drinkcard-cc green"for="'+id+'green"></label><div class="popuptext" id="green'+id+'Popup"><p>green</p></div></div>'
 }
 function orientationElement(id){
     return '<br><br><div class="cc-selector-2" style="text-align:left; margin-left: 30vw"><input id="'+id+'vertical" type="radio" name="'+id+'orientation" value="vertical" /><label for="'+id+'vertical">Vertical</label><br><br><input id="'+id+'horizontal" type="radio" name="'+id+'orientation" value="horizontal" /><label for="'+id+'horizontal">Horizontal</label><br></div><br>'
@@ -195,7 +200,7 @@ function MakeProduct(title, description, price, image, thumbimage, id, sizes, co
         document.getElementById("allproducts").innerHTML = document.getElementById("allproducts").innerHTML + newproduct;
     }
     else if(sizes && color){
-        var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+colorElement(id)+sizeElement(id)+'<br><ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-size="'+id+'size" data-item-color="'+id+'color" data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
+        var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+colorElement(id)+sizeElement(id)+'<br><ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-size="'+id+'size" data-item-color="'+id+'color" data-item-shipCoeff="'+ship+'" data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("allproducts").innerHTML = document.getElementById("allproducts").innerHTML + newproduct;
     }
     else if(sizes && orientation){
@@ -218,13 +223,14 @@ function MakeProduct(title, description, price, image, thumbimage, id, sizes, co
         var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+orientationElement(id)+'<ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'"  data-item-shipCoeff="'+ship+'"  data-item-orientation="'+id+'orientation"  data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("allproducts").innerHTML = document.getElementById("allproducts").innerHTML + newproduct;
     }
+
     else{    
         var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5><ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'"  data-item-shipCoeff="'+ship+'"  data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("allproducts").innerHTML = document.getElementById("allproducts").innerHTML + newproduct;
     }
 
 }
-function MakeApparellProduct(title, description, price, image, thumbimage, id, sizes, color, orientation, ship){
+function MakeApparellProduct(title, description, price, image, thumbimage, id, sizes, color, orientation, ship, hatColor){
     if(sizes && color && orientation){
         var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+colorElement(id)+sizeElement(id)+orientationElement(id)+'<br><ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-size="'+id+'size" data-item-color="'+id+'color" data-item-orientation="'+id+'orientation"   data-item-shipCoeff="'+ship+'"   data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("Apparell").innerHTML = document.getElementById("Apparell").innerHTML + newproduct;
@@ -253,6 +259,10 @@ function MakeApparellProduct(title, description, price, image, thumbimage, id, s
         var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+colorElement(id)+'<ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'"   data-item-shipCoeff="'+ship+'"   data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-color="'+id+'color" data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("Apparell").innerHTML = document.getElementById("Apparell").innerHTML + newproduct;
     }
+    else if (hatColor){
+        var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+hatColorElement(id)+'<ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'"   data-item-shipCoeff="'+ship+'"   data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-color="'+id+'color" data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
+        document.getElementById("Apparell").innerHTML = document.getElementById("Apparell").innerHTML + newproduct;
+    }  
     else if (orientation){
         var newproduct = '<section><div class="gallery style1 small lightbox onscroll-fade-in">'+imageElement(image, thumbimage)+'</div><br><h3>'+title+'</h3><p style="margin: 20px">'+description+'</p><h5>$'+price+'</h5>'+orientationElement(id)+'<ul class="actions vertical"><li><button class="snipcart-add-item-temp" data-item-id="'+id+'" data-item-price="'+price+'" data-item-url="/" data-item-description="'+description+'" data-item-image="'+thumbimage[0]+'" data-item-orientation="'+id+'orientation"   data-item-shipCoeff="'+ship+'"    data-item-name="'+title+'">Add to cart</button></ul></section><hr>'
         document.getElementById("Apparell").innerHTML = document.getElementById("Apparell").innerHTML + newproduct;
@@ -543,7 +553,7 @@ expandbtn.onclick = function () {
         .onSnapshot((snapshot) => {
           snapshot.forEach((doc) => {
             const data = doc.data();
-            //console.log(data)
+            // console.log(data)
             if(!(data.color === null) && !(data.size ===null) && !(data.orientation ===null)){
                 if(data.thumbimage === null){
                     MakeProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, data.color, data.orientation, data.ship)
@@ -640,63 +650,73 @@ expandApparellbtn.onclick = function () {
         .onSnapshot((snapshot) => {
           snapshot.forEach((doc) => {
             const data = doc.data();
-            //console.log(data)
+            console.log(data)
+            
             if(!(data.color === null) && !(data.size ===null) && !(data.orientation ===null)){
+                console.log("catcher", data)
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, data.color, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, data.color, data.orientation, data.ship, data.hatcolor)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, data.color, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, data.color, data.orientation, data.ship, data.hatcolor)
                 }
             }
             else if(!(data.color === null) && !(data.size ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, data.color, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, data.color, false, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, data.color, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, data.color, false, data.ship, false)
                 }
             }
             else if(!(data.color === null) && !(data.orientation ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, data.color, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, data.color, data.orientation, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, data.color, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, data.color, data.orientation, data.ship, false)
                 }
             }
             else if(!(data.size ===null) && !(data.orientation ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, data.orientation, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, false, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id,  data.size, false, data.orientation, data.ship, false)
                 }
             }else if(!(data.color === null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, data.color, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, data.color, false, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, data.color, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, data.color, false, data.ship, false)
+                }
+            }else if(!(data.hatcolor === null)){
+                
+                if(data.thumbimage === null){
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, data.color, false, data.ship, data.hatcolor)
+                }else{
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, data.color, false, data.ship, data.hatcolor)
                 }
             }else if(!(data.size ===null)&&!(data.checkinventory ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, false, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, data.size, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, data.size, false, false, data.ship, false)
                 }
             }else if(!(data.size ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, data.size, false, false, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, data.size, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, data.size, false, false, data.ship, false)
                 }
             }else if(!(data.orientation ===null)){
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, false, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, false, data.orientation, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, false, data.orientation, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, false, data.orientation, data.ship, false)
                 }
             }else{
+                console.log("catcher"+ data)
                 if(data.thumbimage === null){
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.image, data.id, false, false, data.ship, false)
                 }else{
-                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, false, data.ship)
+                    MakeApparellProduct(data.title, data.description, data.price, data.image, data.thumbimage, data.id, false, false, data.ship, false)
                 }
             }
             
@@ -752,7 +772,13 @@ cartbtn.onclick = function () {
     }else{
         total = (total+(8*shipCoeff*CouponCoeffShip))*CouponCoeff
     }
-    
+    if (total < localStorage.getItem("GCAmount")){
+        localStorage.setItem("newbalance", localStorage.getItem("GCAmount") - total)
+
+        total = 0;
+    }else{
+        total = total - localStorage.getItem("GCAmount")
+    }
 
     document.getElementById("cartList").innerHTML = CartList + "Shipping and Handling: + $"+parseFloat(ship.toFixed(2))*CouponCoeffShip+"<br><br><p>Total: $"+parseFloat(total.toFixed(2))+"</p>"
     localStorage.setItem("total", parseFloat(total.toFixed(2)))
@@ -793,7 +819,13 @@ function removeElem(index){
             }else{
                 total = (total+(8*shipCoeff*CouponCoeffShip))*CouponCoeff
             }
-            
+            if (total < localStorage.getItem("GCAmount")){
+                localStorage.setItem("newbalance", localStorage.getItem("GCAmount") - total)
+
+                total = 0;
+            }else{
+                total = total - localStorage.getItem("GCAmount")
+            }
             document.getElementById("cartList").innerHTML = CartList + "Shipping and Handling: + $"+parseFloat(ship.toFixed(2))*CouponCoeffShip+"<br><br><p>Total: $"+parseFloat(total.toFixed(2))+"</p>"
             localStorage.setItem("total", parseFloat(total.toFixed(2)))
             return  
@@ -822,6 +854,13 @@ function removeElem(index){
             total = (total+32)*CouponCoeff
         }else{
             total = (total+(8*shipCoeff*CouponCoeffShip))*CouponCoeff
+        }
+        if (total < localStorage.getItem("GCAmount")){
+            localStorage.setItem("newbalance", localStorage.getItem("GCAmount") - total)
+
+            total = 0;
+        }else{
+            total = total - localStorage.getItem("GCAmount")
         }
         document.getElementById("cartList").innerHTML = CartList + "Shipping and Handling: + $"+parseFloat(ship.toFixed(2))*CouponCoeffShip+"<br><br><p>Total: $"+parseFloat(total.toFixed(2))+"</p>"
         localStorage.setItem("total", parseFloat(total.toFixed(2)))
@@ -864,6 +903,13 @@ function refreshCart(){
             }else{
                 total = (total+(8*shipCoeff*CouponCoeffShip))*CouponCoeff
             }
+            if (total < localStorage.getItem("GCAmount")){
+                localStorage.setItem("newbalance", localStorage.getItem("GCAmount") - total)
+
+                total = 0;
+            }else{
+                total = total - localStorage.getItem("GCAmount")
+            }
             
             document.getElementById("cartList").innerHTML = CartList + "Shipping and Handling: + $"+parseFloat(ship.toFixed(2))*CouponCoeffShip+"<br><br><p>Total: $"+parseFloat(total.toFixed(2))+"</p>"
             localStorage.setItem("total", parseFloat(total.toFixed(2)))
@@ -894,6 +940,14 @@ function refreshCart(){
             total = (total+(8*shipCoeff*CouponCoeffShip))*CouponCoeff
         }
         
+        if (total < localStorage.getItem("GCAmount")){
+            localStorage.setItem("newbalance", localStorage.getItem("GCAmount") - total)
+
+            total = 0;
+        }else{
+            total = total - localStorage.getItem("GCAmount")
+        }
+
         document.getElementById("cartList").innerHTML = CartList + "Shipping and Handling: + $"+parseFloat(ship.toFixed(2))*CouponCoeffShip+"<br><br><p>Total: $"+parseFloat(total.toFixed(2))+"</p>"
         localStorage.setItem("total", parseFloat(total.toFixed(2)))
         return
@@ -978,7 +1032,48 @@ document
       if(!luck){
         document.getElementById("CouponResponse").innerHTML = "This Code is not Recognized."
       }
-      refreshCart()
+      try {
+        refreshCart()
+
+      } catch (error) {
+        
+      }
+    })
+
+  })
+
+  document
+  .querySelector('#gift-cert')
+  .addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    const code = form.get('giftCard');
+    firebase
+    .firestore()
+    .collection('GiftCert')
+    .onSnapshot((snapshot) => {
+        var luck = false;
+      snapshot.forEach((doc) => {
+          var data = doc.data();
+          //console.log(code)
+          console.log(doc.id)
+        if(code === doc.id){
+            localStorage.setItem("GCAmount", data.total)
+            document.getElementById("CertResponse").innerHTML = "Submitted! Your Gift Certificate is at $"+data.total
+            luck = true;
+            localStorage.setItem("newbalance", 0)
+            localStorage.setItem("newbalanceID", doc.id)
+        } 
+      })
+      if(!luck){
+        document.getElementById("CertResponse").innerHTML = "This Code is not Recognized."
+      }
+      try {
+        refreshCart()
+
+      } catch (error) {
+        
+      }
     })
 
   })
@@ -1046,6 +1141,27 @@ window.onload = function() {
         //     info.innerHTML = "&#9432;"
         // })
     }
+}
+
+document
+.querySelector('#GC')
+.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const form = new FormData(event.target);
+    const amount = Number(form.get('buyGC'));
+    certificateSubmitted(amount)
+    console.log(amount)
+    document.location.href = "checkout/";
+})
+
+function certificateSubmitted(amount){
+    localStorage.setItem("total", amount)
+    localStorage.setItem("giftcert", 1)
+
+    var order = '{"orders": [{ "id": "gift certificate", "price": "'+amount+'", "description": "Gift Certificate", "ship": "0", "image": "./images/logo.png", "name": "Gift Certificate" },'
+    localStorage.setItem("log", order)
+
 }
 
 
