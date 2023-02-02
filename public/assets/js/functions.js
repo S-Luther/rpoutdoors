@@ -1,3 +1,82 @@
+if(window.location.href.includes("sohn")){
+    document.getElementById("wrapper").style.display = "none";
+    document.getElementById("sohn-wrapper").style.display = "block";
+}else{
+    document.getElementById("wrapper").style.display = "block";
+    document.getElementById("sohn-wrapper").style.display = "none";
+}
+
+
+window.addEventListener("hashchange", () => {
+
+
+
+    if(window.location.href.includes("sohn")){
+        document.getElementById("wrapper").style.display = "none";
+        document.getElementById("sohn-wrapper").style.display = "block";
+    }else{
+        document.getElementById("wrapper").style.display = "block";
+        document.getElementById("sohn-wrapper").style.display = "none";
+    }
+});
+
+document.getElementById("basic-overlay").style.display = "none";
+document.getElementById("basic-plus-overlay").style.display = "none";
+document.getElementById("platinum-overlay").style.display = "none";
+
+
+
+document.getElementById("basic-overlay-close").addEventListener("click", ()=>{
+    document.getElementById("basic-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("basic-add").addEventListener("click", ()=>{
+    document.getElementById("basic-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("basic").addEventListener("click", ()=>{
+    document.getElementById("basic-overlay").style.display = "block";
+    document.getElementById("cartBtn").style.display = "none";
+    
+});
+
+
+document.getElementById("basic-plus").addEventListener("click", ()=>{
+    document.getElementById("basic-plus-overlay").style.display = "block";
+    document.getElementById("cartBtn").style.display = "none";
+});
+
+document.getElementById("basic-plus-close").addEventListener("click", ()=>{
+    document.getElementById("basic-plus-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("basic-plus-add").addEventListener("click", ()=>{
+    document.getElementById("basic-plus-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("platinum").addEventListener("click", ()=>{
+    document.getElementById("platinum-overlay").style.display = "block";
+    document.getElementById("cartBtn").style.display = "none";
+});
+
+document.getElementById("platinum-close").addEventListener("click", ()=>{
+    document.getElementById("platinum-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("platinum-add").addEventListener("click", ()=>{
+    document.getElementById("platinum-overlay").style.display = "none";
+    document.getElementById("cartBtn").style.display = "block";
+});
+
+
+
+
+
 var stripe = Stripe('pk_live_51JMkixJlaDijqZBddeXWU27898Hsc8MUh96kkIMhlgqbS8eZ5sMxEb9rbD6xo3gylm60V4heVcWnH27UmI1buPKd00GKt7UBUT');
 localStorage.setItem("total", 0)
 localStorage.setItem("giftcert", 0)
@@ -747,8 +826,10 @@ cartbtn.onclick = function () {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.getElementById("cartOverlay").style.display = "block"
     document.getElementById("cartOverlay").style.width = "100vw"
+    document.getElementById("cartOverlay").style.height = "100vh"
     setTimeout(function(){
         document.getElementById("wrapper").style.display = "none"
+        document.getElementById("sohn-wrapper").style.display = "none";
     },500);
     var CartList = "<br>";
     var total = 0.0
