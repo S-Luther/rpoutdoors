@@ -533,7 +533,7 @@
     }
     console.log(orderSummary)
   })
-  document.getElementById("order").value=orderSummary
+  document.getElementById("order").value=orderSummary+localStorage.getItem("extra");
 
   }
   else{

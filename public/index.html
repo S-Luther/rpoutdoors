@@ -745,11 +745,12 @@
 						<p>
 						 <ul>
 							<li>Use of Initial Ascent day pack</li>
-							<li>A day pass to MAF</li>
+							<li>A day pass for day of course selected and a free additional day pass</li>
+							<li>Free Onx premium 1 year membership </li>
 							<li>Exclusive discounts codes from some amazing companies</li>
 							<li>As well as exclusive access to the Night School of Hard Nocks, where we will break down the day and go over topics such as E scouting and OnX use.</li>
 						</ul>	
-						Shoot through a course specially formatted to bring real life shot scenarios and receive coaching from certified instructors on shot placement, footwork, etc. while having a blast and making some new friends along the way!
+						Shoot through a course with our certified instructors and receive coaching on shot placement, footwork, etc. while having a blast and making new friends along the way!
 						</p>
 					</div>
 					<div class="image">
@@ -770,7 +771,8 @@
 
 					<div class="content">
 						<h2>Shooters should be prepared...</h2>
-						<p>for 3-4 hours on the course starting at 7 am. Afternoon courses will run roughly the same time frame but may experience some back up on the course.<br/> <br/>Afternoon courses start at 2 pm.  Shooters are encouraged to have their hunting gear on them. If you have a pack, bino harness, or a quiver on while hunting, you should have it on during this course.
+						<p> for 3-4 hours on the course. Morning courses begin at 7 am and afternoon courses begin at 2 pm. Morning Sessions include VIP access to the mountain. We will be the first people on the course. 
+							Shooters are encouraged to have their hunting gear on.  If you wear a bino harness, a pack or have a bow mounted quiver while hunting, please do so on the course.
 						</p>
 					</div>
 					<div class="image">
@@ -781,7 +783,7 @@
 
 					<div class="content">
 						<h2>Practice like you play!  </h2>
-						<p>This course is geared towards archers with some experience, but BRAND NEW ARCHERS ARE NOT DISCOURAGED FROM SIGNING UP, but some experience is helpful. We are experienced hunters and archers who are here to help.</p>
+						<p>This course is geared to put you in as real life shooting scenarios as possible. Please be prepared to push your comfort limits as we designed this course to challenge you.  We pull from our past experiences to make sure you are as prepared as possible for whatever the mountain throws at you!</p>
 					</div>
 					<div class="image">
 						<img src="images/basp.jpg" alt="" />
@@ -799,7 +801,7 @@
 							<section>
 								<h1>Basic</h1>
 								<p style="text-align: center;">
-									A day pass and use of IA day pack for the course. Exclusive discounts from IA, Straight Six archery, Red patch Outdoors and OnX. 
+									Day pass plus free additional pass. Free OnX premium membership. Use of Initial Ascent daypack for the course.  Discount codes from Initial Ascent, Straight Six Archery and Red Patch Outdoors. 
 								<br/>
 								<br/>
 								$199
@@ -824,7 +826,7 @@
 								<p  style="text-align: center;">Basic package plus RPO Bowdangler.
 									<br/>
 									<br/>
-									<br/><br/>
+									<br/><br/><br/><br/>
 									$250	
 								</p>
 								
@@ -843,9 +845,9 @@
 								<section>
 
 									<h1>Platinum</h1>
-									<p  style="text-align: center;">Basic Plus package and choice of RPO Luther or pateman chest rig package in either  tan, green, multi cam or blaze orange. 
+									<p  style="text-align: center;">Basic Plus package and choice of RPO Luther or Pateman chest rig package in either  tan, green, multi cam or blaze orange. 
 										<br/>
-										<br/>
+										<br/><br/><br/>
 										$399
 									</p>
 	
@@ -920,201 +922,262 @@
 			<div  style="max-width: 500px; text-align: center; background-color: white;padding: 40px;margin:auto;">
 				<p id="basic-overlay-close" style="height: 0; margin-top: -30px; float: right; cursor: pointer;">x</p>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select name="b-event-category" id="b-event-category" required>
 						<option value="">Event</option>
-						<option value="1">Big Sky, MT</option>
-						<option value="1">Eagle Point, UT</option>
-						<option value="1">Soldier Hollow, UT</option>
-						<option value="1">Purgatory, CO</option>
+						<option value="0" id="rbs">Soldier Hollow - Midway Utah - May 26-28</option>
+						<option id="sb" disabled>12 left</option>
+						<option value="1" id="rbp">Purgatory Resort - Durango, Colorado - June 9-11</option>
+						<option id="pb" disabled>12 left</option>
+						<option value="2" id="rbe">Ski Eagle Point Resort - Beaver, Utah - June 23-25</option>
+						<option id="eb" disabled>12 left</option>
+						<option value="3" id="rbb">Blacktail Mountain - Lakeside, Montana July 21-23</option>
+						<option id="bb" disabled>12 left</option>
 					</select>
 				</div>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select disabled name="b-day-category" id="b-day-category" required>
 						<option value="">Day</option>
-						<option value="1">Friday</option>
-						<option value="1">Saturday</option>
+						<option value="0" id="rbf">Friday </option>
+						<option id="bf" disabled>6 left</option>
+						<option value="1" id="rbs">Saturday</option>
+						<option id="bs" disabled>6 left</option>
 
 					</select>
 				</div>
 				<br/>
 				<div >
-					<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name">
+					<input disabled type="text" name="b-name" id="b-name" value="" required placeholder="Name">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email">
+					<input disabled type="email" name="b-email" id="b-email" value="" required placeholder="Email">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Phone Number">
+					<input disabled type="tel" name="b-phone" id="b-phone" value="" required placeholder="Phone Number">
 				</div>
 				
 				<div >
-					<select name="demo-category" id="demo-category">
-						<option value="">Shirt Size</option>
-						<option value="1">XSmall</option>
-						<option value="1">Small</option>
-						<option value="1">Medium</option>
-						<option value="1">Large</option>
-						<option value="1">XLarge</option><option value="1">XXLarge</option>
+					<select disabled required name="b-size-category" id="b-size-category">
+						<option value="0">Shirt Size</option>
+						<option value="xsmall">XSmall</option>
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<option value="large">Large</option>
+						<option value="xlarge">XLarge</option>
+						<option value="xxlarge">XXLarge</option>
 					</select>
 				</div>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Emergency contact / any necessary medical information" rows="2"></textarea></div>
+				<div class="col-6 col-12-xsmall" style="width: 49.9%; float: left;"><input disabled type="text" name="b-emergency-name" id="b-emergency-name" value="" placeholder="Emergency Contact Name"></div>
+				<div class="col-6 col-12-xsmall" style="width: 50%; float: left;"><input disabled type="text" name="b-emergency-number" id="b-emergency-number" value="" placeholder="Emergency Contact Number"></div>
+				<div class="col-12"><textarea disabled required name="b-e-message" id="b-e-message" placeholder="Any necessary medical information" rows="2"></textarea></div>
 				
-				<div class="col-6 col-12-small"><input type="checkbox" id="walk" name="walk"><label for="walk">I can walk 3 miles</label>
+				<div class="col-6 col-12-small"><input disabled required type="checkbox" id="b-walk" name="b-walk"><label for="b-walk">I can walk 3 miles</label>
 				
-				<input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div>
-				<br/>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
+				<!-- <input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div> -->
+				<br/><br/>
+				<div class="col-12"><textarea disabled name="b-message" id="b-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
 				<br/>
 				<ul  style="text-align: center;"  class="actions vertical">
 					<li><button class="snipcart-add-item"
 						id="basic-add"
+						disabled
 						data-item-id="Basic School Of Hard Nocks Session"
 						data-item-price="199.00"
 						data-item-url="/"
 						data-item-description="A day pass and use of IA day pack for the course. Exclusive discounts from IA, Straight Six archery, Red patch Outdoors and OnX."
 						data-item-image="images/logo.png"
 						data-item-shipCoeff="0"
-						data-item-name="Basic School Of Hard Nocks Session">
+						data-item-name="Basic School Of Hard Nocks Session"
+						>
 						Add to cart
 					  </button></li>
 				</ul>
 			</div>
 
 		</div>
-		<div id="basic-plus-overlay"style="position: fixed; top: 0; width: 100vw;background-color: #00000066;height: 100vh;">
-			<div style="max-width: 500px; text-align: center; background-color: white;padding: 40px;margin:auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div id="basic-plus-overlay" style="position: fixed; top: 0; width: 100vw;background-color: #00000066;height: 100vh;">
+			
+			<div  style="max-width: 500px; text-align: center; background-color: white;padding: 40px;margin:auto;">
 				<p id="basic-plus-close" style="height: 0; margin-top: -30px; float: right; cursor: pointer;">x</p>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select name="p-event-category" id="b-event-category" required>
 						<option value="">Event</option>
-						<option value="1">Big Sky, MT</option>
-						<option value="1">Eagle Point, UT</option>
-						<option value="1">Soldier Hollow, UT</option>
-						<option value="1">Purgatory, CO</option>
+						<option value="0" id="rps">Soldier Hollow - Midway Utah - May 26-28</option>
+						<option id="sp" disabled>12 left</option>
+						<option value="1" id="rpp">Purgatory Resort - Durango, Colorado - June 9-11</option>
+						<option id="pp" disabled>12 left</option>
+						<option value="2" id="rpe">Ski Eagle Point Resort - Beaver, Utah - June 23-25</option>
+						<option id="ep" disabled>12 left</option>
+						<option value="3" id="rpb">Blacktail Mountain - Lakeside, Montana July 21-23</option>
+						<option id="bp" disabled>12 left</option>
 					</select>
 				</div>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select disabled name="p-day-category" id="p-day-category" required>
 						<option value="">Day</option>
-						<option value="1">Friday</option>
-						<option value="1">Saturday</option>
+						<option value="0" id="rpf">Friday </option>
+						<option id="pf" disabled>6 left</option>
+						<option value="1" id="rps">Saturday</option>
+						<option id="ps" disabled>6 left</option>
 
 					</select>
 				</div>
 				<br/>
 				<div >
-					<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name">
+					<input disabled type="text" name="p-name" id="p-name" value="" required placeholder="Name">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email">
+					<input disabled type="email" name="p-email" id="p-email" value="" required placeholder="Email">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Phone Number">
+					<input disabled type="tel" name="p-phone" id="p-phone" value="" required placeholder="Phone Number">
 				</div>
 				
 				<div >
-					<select name="demo-category" id="demo-category">
-						<option value="">Shirt Size</option>
-						<option value="1">XSmall</option>
-						<option value="1">Small</option>
-						<option value="1">Medium</option>
-						<option value="1">Large</option>
-						<option value="1">XLarge</option>
-						<option value="1">XXLarge</option>
+					<select disabled required name="p-size-category" id="p-size-category">
+						<option value="0">Shirt Size</option>
+						<option value="xsmall">XSmall</option>
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<option value="large">Large</option>
+						<option value="xlarge">XLarge</option>
+						<option value="xxlarge">XXLarge</option>
 					</select>
 				</div>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Emergency contact / any necessary medical information" rows="2"></textarea></div>
+				<div class="col-6 col-12-xsmall" style="width: 49.9%; float: left;"><input disabled type="text" name="p-emergency-name" id="p-emergency-name" value="" placeholder="Emergency Contact Name"></div>
+				<div class="col-6 col-12-xsmall" style="width: 50%; float: left;"><input disabled type="text" name="p-emergency-number" id="p-emergency-number" value="" placeholder="Emergency Contact Number"></div>
+				<div class="col-12"><textarea disabled required name="p-e-message" id="p-e-message" placeholder="Any necessary medical information" rows="2"></textarea></div>
 				
-				<div class="col-6 col-12-small"><input type="checkbox" id="walk" name="walk"><label for="walk">I can walk 3 miles</label>
+				<div class="col-6 col-12-small"><input disabled required type="checkbox" id="p-walk" name="p-walk"><label for="p-walk">I can walk 3 miles</label>
 				
-				<input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div>
-				<br/>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
+				<!-- <input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div> -->
+				<br/><br/>
+				<div class="col-12"><textarea disabled name="p-message" id="p-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
 				<br/>
 				<ul  style="text-align: center;"  class="actions vertical">
 					<li><button class="snipcart-add-item"
 						id="basic-plus-add"
+						disabled
 						data-item-id="Basic Plus School Of Hard Nocks Session"
 						data-item-price="250.00"
 						data-item-url="/"
 						data-item-description="Basic package plus RPO Bowdangler."
 						data-item-image="images/logo.png"
 						data-item-shipCoeff="0"
-						data-item-name="Basic Plus School Of Hard Nocks Session">
+						data-item-name="Basic Plus School Of Hard Nocks Session"
+						>
 						Add to cart
 					  </button></li>
 				</ul>
 			</div>
+
 		</div>
-		<div id="platinum-overlay"style="position: fixed; top: 0; width: 100vw;background-color: #00000066;height: 100vh;">
-			<div style="max-width: 500px; text-align: center; background-color: white;padding: 40px;margin:auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+		<div id="platinum-overlay" style="position: fixed; top: 0; width: 100vw;background-color: #00000066;height: 100vh;">
+			
+			<div  style="max-width: 500px; text-align: center; background-color: white;padding: 40px;margin:auto;">
 				<p id="platinum-close" style="height: 0; margin-top: -30px; float: right; cursor: pointer;">x</p>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select name="p-event-category" id="b-event-category" required>
 						<option value="">Event</option>
-						<option value="1">Big Sky, MT</option>
-						<option value="1">Eagle Point, UT</option>
-						<option value="1">Soldier Hollow, UT</option>
-						<option value="1">Purgatory, CO</option>
+						<option value="0" id="rps">Soldier Hollow - Midway Utah - May 26-28</option>
+						<option id="sp" disabled>12 left</option>
+						<option value="1" id="rpp">Purgatory Resort - Durango, Colorado - June 9-11</option>
+						<option id="pp" disabled>12 left</option>
+						<option value="2" id="rpe">Ski Eagle Point Resort - Beaver, Utah - June 23-25</option>
+						<option id="ep" disabled>12 left</option>
+						<option value="3" id="rpb">Blacktail Mountain - Lakeside, Montana July 21-23</option>
+						<option id="bp" disabled>12 left</option>
 					</select>
 				</div>
 				<div >
-					<select name="demo-category" id="demo-category">
+					<select disabled name="p-day-category" id="p-day-category" required>
 						<option value="">Day</option>
-						<option value="1">Friday</option>
-						<option value="1">Saturday</option>
+						<option value="0" id="rpf">Friday </option>
+						<option id="pf" disabled>6 left</option>
+						<option value="1" id="rps">Saturday</option>
+						<option id="ps" disabled>6 left</option>
 
 					</select>
 				</div>
 				<br/>
 				<div >
-					<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name">
+					<input disabled type="text" name="p-name" id="p-name" value="" required placeholder="Name">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email">
+					<input disabled type="email" name="p-email" id="p-email" value="" required placeholder="Email">
 				</div>
 				
 				<div >
-					<input type="email" name="demo-email" id="demo-email" value="" placeholder="Phone Number">
+					<input disabled type="tel" name="p-phone" id="p-phone" value="" required placeholder="Phone Number">
 				</div>
 				
 				<div >
-					<select name="demo-category" id="demo-category">
-						<option value="">Shirt Size</option>
-						<option value="1">XSmall</option>
-						<option value="1">Small</option>
-						<option value="1">Medium</option>
-						<option value="1">Large</option>
-						<option value="1">XLarge</option><option value="1">XXLarge</option>
+					<select disabled required name="p-size-category" id="p-size-category">
+						<option value="0">Shirt Size</option>
+						<option value="xsmall">XSmall</option>
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<option value="large">Large</option>
+						<option value="xlarge">XLarge</option>
+						<option value="xxlarge">XXLarge</option>
 					</select>
 				</div>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Emergency contact / any necessary medical information" rows="2"></textarea></div>
+				<div class="col-6 col-12-xsmall" style="width: 49.9%; float: left;"><input disabled type="text" name="p-emergency-name" id="p-emergency-name" value="" placeholder="Emergency Contact Name"></div>
+				<div class="col-6 col-12-xsmall" style="width: 50%; float: left;"><input disabled type="text" name="p-emergency-number" id="p-emergency-number" value="" placeholder="Emergency Contact Number"></div>
+				<div class="col-12"><textarea disabled required name="p-e-message" id="p-e-message" placeholder="Any necessary medical information" rows="2"></textarea></div>
 				
-				<div class="col-6 col-12-small"><input type="checkbox" id="walk" name="walk"><label for="walk">I can walk 3 miles</label>
+				<div class="col-6 col-12-small"><input disabled required type="checkbox" id="p-walk" name="p-walk"><label for="p-walk">I can walk 3 miles</label>
 				
-				<input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div>
-				<br/>
-				<div class="col-12"><textarea name="demo-message" id="demo-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
+				<!-- <input type="checkbox" id="injury" name="injury"><label for="injury">I will not hold RPO liable for any injury.</label></div> -->
+				<br/><br/>
+				<div class="col-12"><textarea disabled name="p-message" id="p-message" placeholder="Archery experience/goals/small blurb about self" rows="2"></textarea></div>
 				<br/>
 				<ul  style="text-align: center;"  class="actions vertical">
 					<li><button class="snipcart-add-item"
 						id="platinum-add"
+						disabled
 						data-item-id="Platinum School Of Hard Nocks Session"
 						data-item-price="399.00"
 						data-item-url="/"
-						data-item-description="Basic Plus package and choice of RPO Luther or pateman chest rig package in either tan, green, multi cam or blaze orange."
+						data-item-description="Basic Plus package and choice of RPO Luther or Pateman chest rig package in either tan, green, multi cam or blaze orange."
 						data-item-image="images/logo.png"
 						data-item-shipCoeff="0"
-						data-item-name="Platinum School Of Hard Nocks Session">
+						data-item-name="Platinum School Of Hard Nocks Session"
+						>
 						Add to cart
 					  </button></li>
 				</ul>
 			</div>
+
 		</div>
 		<!-- Scripts -->
 		<script src="/__/firebase/8.10.0/firebase-app.js"></script>

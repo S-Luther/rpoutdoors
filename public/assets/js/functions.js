@@ -1,6 +1,278 @@
+var BF = 0;
+var BS = 0;
+var EF = 0;
+var ES = 0;
+var PF = 0;
+var PS = 0;
+var SF = 0;
+var SS = 0;
+var ev = "";
+var day = "";
+var di = 0; 
+localStorage.setItem("extra", "");
+
+function updateSpots(){
+    try {
+        firebase
+        .firestore()
+        .collection('Events')
+        .onSnapshot((snapshot) => {
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                BF = data.Blacktail[0];
+                BS = data.Blacktail[1];
+                EF = data.Eagle[0];
+                ES = data.Eagle[1];
+                PF = data.Purgatory[0];
+                PS = data.Purgatory[1];
+                SF = data.Soldier[0];
+                SS = data.Soldier[1];
+
+                document.getElementById("bb").textContent = BF+BS+" left";
+                document.getElementById("bb").style.textAlign = "right";
+                if((BF+BS)>4){
+                    document.getElementById("bb").style.color = "green";
+                }else{
+                    document.getElementById("bb").style.color = "red";
+
+                }
+                if(BF+BS==0){
+                    document.getElementById("rbb").disabled = true;
+                }else{
+                    document.getElementById("rbb").disabled = false;
+                }
+
+                document.getElementById("eb").textContent = EF+ES+" left";
+                document.getElementById("eb").style.textAlign = "right";
+                if((EF+ES)>4){
+                    document.getElementById("eb").style.color = "green";
+                }else{
+                    document.getElementById("eb").style.color = "red";
+
+                }
+                if(EF+ES==0){
+                    document.getElementById("rbe").disabled = true;
+                }else{
+                    document.getElementById("rbe").disabled = false;
+                }
+
+
+                document.getElementById("pb").textContent = PF+PS+" left";
+                document.getElementById("pb").style.textAlign = "right";
+                if((PF+PS)>4){
+                    document.getElementById("pb").style.color = "green";
+                }else{
+                    document.getElementById("pb").style.color = "red";
+
+                }
+                if(PF+PS==0){
+                    document.getElementById("rbp").disabled = true;
+                }
+                else{
+                    document.getElementById("rbp").disabled = false;
+                }
+
+
+                document.getElementById("sb").textContent = SF+SS+" left";
+                document.getElementById("sb").style.textAlign = "right";
+                if((SF+SS)>4){
+                    document.getElementById("sb").style.color = "green";
+                }else{
+                    document.getElementById("sb").style.color = "red";
+
+                }
+                if(SF+SS==0){
+                    document.getElementById("rbs").disabled = true;
+                }else{
+                    document.getElementById("rbs").disabled = false;
+                }
+
+                
+            });
+        });
+    } catch (e) {
+
+    }
+}
+var choice = 0;
+document.getElementById("b-event-category").addEventListener("change", function() {
+    document.getElementById("b-day-category").disabled = false;
+    choice = document.getElementById("b-event-category").value;
+
+    var tf = 0;
+    var ts = 0;
+
+    if(choice ==0){
+        tf= SF;
+
+        ts= SS;
+        ev = "Soldier Hollow";
+    }
+    if(choice ==1){
+        tf= PF;
+
+        ts= PS;
+        ev = "Purgatory Resort";
+    }
+    if(choice ==2){
+        tf= EF;
+
+        ts= ES;
+        ev = "Eagle Point";
+    }
+    if(choice == 3){
+        tf= BF;
+
+        ts= BS;
+        ev = "Blacktail";
+    }
+    document.getElementById("bf").textContent = tf+" left";
+    document.getElementById("bf").style.textAlign = "right";
+    if((tf)>2){
+        document.getElementById("bf").style.color = "green";
+    }else{
+        document.getElementById("bf").style.color = "red";
+
+    }
+    if(tf==0){
+        document.getElementById("rbf").disabled = true;
+    }else{
+        document.getElementById("rbf").disabled = false;
+    }
+    document.getElementById("bs").textContent = ts+" left";
+    document.getElementById("bs").style.textAlign = "right";
+    if((ts)>2){
+        document.getElementById("bs").style.color = "green";
+    }else{
+        document.getElementById("bs").style.color = "red";
+
+    }
+    if(ts==0){
+        document.getElementById("rbs").disabled = true;
+    }else{
+        document.getElementById("rbs").disabled = false;
+    }
+    
+
+
+
+});
+document.getElementById("b-day-category").addEventListener("change", function() {
+    if(document.getElementById("b-day-category").value == 0){
+        day = "Friday";
+        
+    }else if(document.getElementById("b-day-category").value == 1){
+        day = "Saturday";
+    }
+    di = document.getElementById("b-day-category").value
+    document.getElementById("b-name").disabled = false;
+    document.getElementById("b-email").disabled = false;
+    document.getElementById("b-phone").disabled = false;
+    document.getElementById("b-size-category").disabled = false;
+    document.getElementById("b-emergency-name").disabled = false;
+    document.getElementById("b-emergency-number").disabled = false;
+    document.getElementById("b-e-message").disabled = false;
+    document.getElementById("b-walk").disabled = false;
+    document.getElementById("b-message").disabled = false;
+    
+});
+
+window.addEventListener("click", function() {
+    if(document.getElementById("b-name").value != "" 
+    && document.getElementById("b-email").value != ""
+    && document.getElementById("b-phone").value != ""
+    && document.getElementById("b-size-category").value != ""
+    && document.getElementById("b-emergency-name").value != ""
+    && document.getElementById("b-emergency-number").value != ""
+    && document.getElementById("b-walk").checked == true){
+        document.getElementById("basic-add").disabled = false;
+        
+    }
+});
+
+
+document.getElementById("basic-add").addEventListener("click", async function() {
+    localStorage.setItem("extra", "At "+ev+" on "+day+", Name: "+ document.getElementById("b-name").value + 
+                                " , Email: "+ document.getElementById("b-email").value +
+                                " , Phone: "+ document.getElementById("b-phone").value +
+                                " , Size: "+ document.getElementById("b-size-category").value +
+                                " , Emergency Contact Name: "+ document.getElementById("b-emergency-name").value +
+                                " , Emergency Contact Number: "+ document.getElementById("b-emergency-number").value + 
+                                " , Medical Message: " + document.getElementById("b-e-message").value +
+                                " , Basic Message: " + document.getElementById("b-message").value);
+
+    console.log(localStorage.getItem("extra"));
+
+    if(ev == "Soldier Hollow"){
+        if(di == 0){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Soldier: [--SF,SS] })
+        }
+        if(di == 1){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Soldier: [SF,--SS] })
+        }
+    }else if(ev == "Purgatory Resort"){
+        if(di == 0){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Purgatory: [--PF,PS] })
+        }
+        if(di == 1){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Purgatory: [PF,--PS] })
+        }
+    }else if(ev == "Eagle Point"){
+        if(di == 0){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Eagle: [--EF,ES] })
+        }
+        if(di == 1){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Eagle: [EF,--ES] })
+        }
+    }else if(ev == "Blacktail"){
+        if(di == 0){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Blacktail: [--BF,BS] })
+        }
+        if(di == 1){
+            await firebase
+                .firestore()
+                .collection("Events")
+                .doc("m1JV3eCZ5fpPN0Y8uvtb")
+                .update({Blacktail: [BF,--BS] })
+        }
+    }
+    
+});
+
+
 if(window.location.href.includes("sohn")){
     document.getElementById("wrapper").style.display = "none";
     document.getElementById("sohn-wrapper").style.display = "block";
+    updateSpots()
+
 }else{
     document.getElementById("wrapper").style.display = "block";
     document.getElementById("sohn-wrapper").style.display = "none";
@@ -14,6 +286,7 @@ window.addEventListener("hashchange", () => {
     if(window.location.href.includes("sohn")){
         document.getElementById("wrapper").style.display = "none";
         document.getElementById("sohn-wrapper").style.display = "block";
+        updateSpots()
     }else{
         document.getElementById("wrapper").style.display = "block";
         document.getElementById("sohn-wrapper").style.display = "none";
@@ -42,36 +315,30 @@ document.getElementById("basic").addEventListener("click", ()=>{
     
 });
 
-
 document.getElementById("basic-plus").addEventListener("click", ()=>{
-    document.getElementById("basic-plus-overlay").style.display = "block";
+    document.getElementById("basic-overlay").style.display = "block";
+
+    document.getElementById('basic-add').setAttribute("data-item-description", "Basic package plus RPO Bowdangler.");
+    document.getElementById('basic-add').setAttribute("data-item-price", "250.00");
+    document.getElementById('basic-add').setAttribute("data-item-id", "Basic Plus School Of Hard Nocks Session");
+    document.getElementById('basic-add').setAttribute("data-item-name", "Basic Plus School Of Hard Nocks Session");
+
     document.getElementById("cartBtn").style.display = "none";
-});
-
-document.getElementById("basic-plus-close").addEventListener("click", ()=>{
-    document.getElementById("basic-plus-overlay").style.display = "none";
-    document.getElementById("cartBtn").style.display = "block";
-});
-
-document.getElementById("basic-plus-add").addEventListener("click", ()=>{
-    document.getElementById("basic-plus-overlay").style.display = "none";
-    document.getElementById("cartBtn").style.display = "block";
 });
 
 document.getElementById("platinum").addEventListener("click", ()=>{
-    document.getElementById("platinum-overlay").style.display = "block";
+    document.getElementById("basic-overlay").style.display = "block";
+
+    document.getElementById('basic-add').setAttribute("data-item-description", "Basic Plus package and choice of RPO Luther or Pateman chest rig package in either tan, green, multi cam or blaze orange.");
+    document.getElementById('basic-add').setAttribute("data-item-price", "399.00");
+    document.getElementById('basic-add').setAttribute("data-item-id", "Platinum School Of Hard Nocks Session");
+    document.getElementById('basic-add').setAttribute("data-item-name", "Platinum School Of Hard Nocks Session");
+
     document.getElementById("cartBtn").style.display = "none";
 });
 
-document.getElementById("platinum-close").addEventListener("click", ()=>{
-    document.getElementById("platinum-overlay").style.display = "none";
-    document.getElementById("cartBtn").style.display = "block";
-});
 
-document.getElementById("platinum-add").addEventListener("click", ()=>{
-    document.getElementById("platinum-overlay").style.display = "none";
-    document.getElementById("cartBtn").style.display = "block";
-});
+
 
 
 
